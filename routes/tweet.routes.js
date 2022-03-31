@@ -22,7 +22,7 @@ router.get("/owned", async (req, res) => {
   // find tweets associated with a user
   const tweets = await Tweet.find({
     user: req.jwtPayload.user._id,
-  });
+  }).populate("user");
   res.status(200).json(tweets);
 });
 
