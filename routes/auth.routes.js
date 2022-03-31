@@ -41,7 +41,7 @@ router.post("/login", async (req, res) => {
       // send the token and the user to the front end
       res.status(200).json({
         token,
-        user
+        user,
       });
     } else {
       res.status(401).send("email or password are incorrect");
@@ -50,5 +50,8 @@ router.post("/login", async (req, res) => {
     res.status(401).send("email or password are incorrect");
   }
 });
+
+// verify route, send status 200 with the correct user
+// get the user from the database
 
 module.exports = router;
