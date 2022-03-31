@@ -38,8 +38,11 @@ router.post("/login", async (req, res) => {
         algorithm: "HS256",
         expiresIn: "6h",
       });
-      // send the token to the user
-      res.status(200).send(token);
+      // send the token and the user to the front end
+      res.status(200).json({
+        token,
+        user
+      });
     } else {
       res.status(401).send("email or password are incorrect");
     }

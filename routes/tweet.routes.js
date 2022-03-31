@@ -1,4 +1,5 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const Tweet = require("../models/tweet.model");
 
 const router = express.Router();
@@ -13,6 +14,15 @@ router.post("/", async (req, res) => {
 // get all tweets
 router.get("/", async (req, res) => {
   const tweets = await Tweet.find().populate("user");
+  res.status(200).json(tweets);
+});
+
+// get all tweets for a user
+router.get("/owned", async (req, res) => {
+  // find tweets associated with a user
+  const tweets = await Tweet.find({
+    user: req.jwtPayload.user._id,
+  });
   res.status(200).json(tweets);
 });
 
